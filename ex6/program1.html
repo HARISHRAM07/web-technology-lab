@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Digital Clock</title>
+</head>
+<body>
+    <h2>Digital Clock</h2>
+    <h1 id="clock"></h1>
+
+    <script>
+        function twoDigits(value) {
+            return value < 10 ? "0" + value : value;
+        }
+
+        function showTime() {
+            let now = new Date();
+            document.getElementById("clock").innerHTML =
+                twoDigits(now.getHours()) + ":" + twoDigits(now.getMinutes()) + ":" + twoDigits(now.getSeconds());
+        }
+
+        showTime();
+        setInterval(showTime, 1000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Birthday Cake Order Form</title>
+</head>
+<body>
+    <h2>Birthday Cake Order Form</h2>
+    <p>
+        Cake:
+        <select id="cake">
+            <option value="500">Half Kg - Rs. 500</option>
+            <option value="900">One Kg - Rs. 900</option>
+            <option value="1600">Two Kg - Rs. 1600</option>
+        </select>
+    </p>
+    <p>Quantity: <input type="number" id="quantity" value="1" min="1"></p>
+    <p>
+        Tip:
+        <input type="radio" name="tip" value="0" checked>None
+        <input type="radio" name="tip" value="50">Rs. 50
+        <input type="radio" name="tip" value="100">Rs. 100
+    </p>
+    <button onclick="calculateTotal()">Calculate Total</button>
+    <p id="result"></p>
+
+    <script>
+        function calculateTotal() {
+            let price = parseFloat(document.getElementById("cake").value);
+            let quantity = parseInt(document.getElementById("quantity").value);
+            let tip = parseFloat(document.querySelector('input[name="tip"]:checked').value);
+
+            if (isNaN(quantity) || quantity < 1) {
+                document.getElementById("result").innerHTML = "Please enter a valid quantity.";
+                return;
+            }
+
+            let cost = price * quantity;
+            let tax = cost * 0.09;
+            let total = cost + tax + tip;
+
+            document.getElementById("result").innerHTML =
+                "Cost: Rs. " + cost.toFixed(2) + "<br>Tax (9%): Rs. " + tax.toFixed(2) +
+                "<br>Tip: Rs. " + tip.toFixed(2) + "<br>Total: Rs. " + total.toFixed(2);
+        }
+    </script>
+</body>
+</html>

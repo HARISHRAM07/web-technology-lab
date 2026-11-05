@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo List</title>
+    <script src="https://code.angularjs.org/1.6.9/angular.min.js"></script>
+    <script>
+        angular.module('todoApp', [])
+            .controller('todoController', function ($scope) {
+                $scope.tasks = [];
+
+                $scope.add = function () {
+                    if ($scope.title) {
+                        $scope.tasks.push($scope.title);
+                    }
+                };
+            });
+    </script>
+</head>
+<body>
+    <div ng-app="todoApp" ng-controller="todoController">
+        <input ng-model="title"><button ng-click="add()">Add</button>
+        <ul>
+            <li ng-repeat="t in tasks track by $index">{{ t }}</li>
+        </ul>
+    </div>
+</body>
+</html>

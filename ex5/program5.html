@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Coin Flip</title>
+</head>
+<body>
+    <h2>Coin Flip</h2>
+    <img id="coin" src="images/heads.svg" alt="Coin" width="120" height="120">
+    <p><button onclick="flip()">Flip</button></p>
+    <p>Heads: <span id="heads">0</span> | Tails: <span id="tails">0</span></p>
+
+    <script>
+        let headCount = 0;
+        let tailCount = 0;
+
+        function flip() {
+            if (Math.random() < 0.5) {
+                headCount++;
+                document.getElementById("coin").src = "images/heads.svg";
+            } else {
+                tailCount++;
+                document.getElementById("coin").src = "images/tails.svg";
+            }
+            document.getElementById("heads").innerHTML = headCount;
+            document.getElementById("tails").innerHTML = tailCount;
+        }
+    </script>
+</body>
+</html>

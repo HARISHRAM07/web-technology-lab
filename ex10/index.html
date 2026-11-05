@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration Form</title>
+    <style>
+        body {
+            font-family: "Times New Roman", Times, serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: blue;
+            text-align: center;
+        }
+
+        form {
+            width: 480px;
+            margin: auto;
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            min-height: 40px;
+        }
+
+        .title {
+            width: 160px;
+            color: blue;
+        }
+
+        .req {
+            color: red;
+        }
+
+        .field {
+            color: blue;
+        }
+
+        input[type="text"], input[type="password"], input[type="number"], input[type="email"] {
+            width: 200px;
+            padding: 3px;
+        }
+
+        .note {
+            width: 480px;
+            margin: auto;
+            color: #444;
+            font-size: 14px;
+        }
+
+        table {
+            width: 440px;
+            margin: 16px auto;
+            border-collapse: collapse;
+            color: blue;
+        }
+
+        td {
+            border: 1px solid gray;
+            padding: 8px;
+        }
+
+        select {
+            width: 150px;
+            padding: 2px;
+        }
+    </style>
+</head>
+<body>
+    <h1>User Registration Form</h1>
+    <p class="note">Website demo: GitHub Pages cannot run Node.js or MongoDB, so this page shows the details in the browser and does not save them. The server version is in the lab record.</p>
+
+    <form id="regForm">
+        <div class="row">
+            <label class="title" for="name">Name<span class="req">*</span></label>
+            <input type="text" id="name" name="name" required pattern="[A-Za-z ]+"
+                title="Name should contain letters only">
+        </div>
+
+        <div class="row">
+            <label class="title" for="password">Password<span class="req">*</span></label>
+            <input type="password" id="password" name="password" required minlength="8">
+        </div>
+
+        <div class="row">
+            <label class="title" for="age">Age<span class="req">*</span></label>
+            <input type="number" id="age" name="age" required min="1" max="120">
+        </div>
+
+        <div class="row">
+            <label class="title" for="mobile">Mobile Number<span class="req">*</span></label>
+            <input type="text" id="mobile" name="mobile" required pattern="[0-9]{10}"
+                title="Mobile number should be 10 digits">
+        </div>
+
+        <div class="row">
+            <label class="title" for="email">Email<span class="req">*</span></label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="row">
+            <span class="title">Gender<span class="req">*</span></span>
+            <span class="field">
+                <input type="radio" name="gender" value="Male" required>Male
+                <input type="radio" name="gender" value="Female">Female
+            </span>
+        </div>
+
+        <div class="row">
+            <label class="title" for="state">State<span class="req">*</span></label>
+            <select id="state" name="state" required>
+                <option value="">Select State</option>
+                <option>Tamilnadu</option>
+                <option>Kerala</option>
+                <option>Karnataka</option>
+                <option>Andhra Pradesh</option>
+            </select>
+        </div>
+
+        <div class="row">
+            <span class="title">Skills<span class="req">*</span></span>
+            <span class="field">
+                <input type="checkbox" name="skills" value="Java Script">Java Script
+                <input type="checkbox" name="skills" value="Python">Python
+                <input type="checkbox" name="skills" value="C++">C++
+                <input type="checkbox" name="skills" value="Java">Java
+            </span>
+        </div>
+
+        <div class="row">
+            <span class="title"></span>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+
+    <h1 id="title" hidden>User Submitted Details</h1>
+    <table id="details"></table>
+
+    <script>
+        // HTML has no required option for a group of checkboxes
+        const boxes = document.querySelectorAll('input[name="skills"]');
+
+        function checkSkills() {
+            const selected = document.querySelector('input[name="skills"]:checked');
+            boxes[0].setCustomValidity(selected ? '' : 'Please select at least one skill');
+        }
+
+        boxes.forEach(function (box) {
+            box.addEventListener('change', checkSkills);
+        });
+        checkSkills();
+
+        // Shows the form details as a table without using a server
+        document.getElementById('regForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const data = new FormData(this);
+            const rows = [
+                ['Name', data.get('name')],
+                ['Age', data.get('age')],
+                ['Mobile Number', data.get('mobile')],
+                ['Email', data.get('email')],
+                ['Gender', data.get('gender')],
+                ['State', data.get('state')],
+                ['Skills', data.getAll('skills').join(', ')]
+            ];
+            const table = document.getElementById('details');
+
+            table.textContent = '';
+            rows.forEach(function (row) {
+                const line = table.insertRow();
+                line.insertCell().textContent = row[0];
+                line.insertCell().textContent = row[1];
+            });
+            document.getElementById('title').hidden = false;
+        });
+    </script>
+</body>
+</html>

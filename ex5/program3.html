@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fruit Farm</title>
+</head>
+<body>
+    <h2>Fruit Farm</h2>
+    <p>Rows: <input type="number" id="rows" value="3" min="1" max="10"></p>
+    <p>Columns: <input type="number" id="cols" value="5" min="1" max="10"></p>
+    <button onclick="grow()">Grow</button>
+    <div id="farm"></div>
+
+    <script>
+        function grow() {
+            let rows = parseInt(document.getElementById("rows").value);
+            let cols = parseInt(document.getElementById("cols").value);
+            let grid = "";
+
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    let fruit = Math.random() < 0.5 ? "apple" : "orange";
+                    grid += '<img src="images/' + fruit + '.svg" alt="' + fruit + '" width="50" height="50">';
+                }
+                grid += "<br>";
+            }
+            document.getElementById("farm").innerHTML = grid;
+        }
+    </script>
+</body>
+</html>

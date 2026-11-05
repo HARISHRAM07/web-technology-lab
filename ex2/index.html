@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harish Ram M - Profile Page</title>
+</head>
+<body>
+    <!-- Heading -->
+    <h1>Harish Ram M</h1>
+    <p>Reg. No: URK24CS9024 | B.Tech CSE | Karunya Institute of Technology and Sciences</p>
+    <hr>
+
+    <!-- Progress elements -->
+    <h2>Lab Progress</h2>
+    <div>
+        <p>HTML: <progress value="100" max="100"></progress></p>
+        <p>CSS: <progress value="90" max="100"></progress></p>
+        <p>JavaScript: <progress value="80" max="100"></progress></p>
+    </div>
+    <hr>
+
+    <!-- Audio and video elements -->
+    <h2>Media</h2>
+    <h3>Audio</h3>
+    <audio controls>
+        <source src="media/tone.wav" type="audio/wav">
+        Your browser does not support audio.
+    </audio>
+    <h3>Video</h3>
+    <video width="320" height="180" controls>
+        <source src="media/sample.mp4" type="video/mp4">
+        Your browser does not support video.
+    </video>
+    <hr>
+
+    <!-- Table -->
+    <h2>Lab Topics</h2>
+    <table border="1" cellpadding="6">
+        <tr>
+            <th>Exercise</th>
+            <th>Topic</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>HTML</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Forms and Media</td>
+        </tr>
+    </table>
+    <hr>
+
+    <!-- Registration form -->
+    <h2>Student Registration</h2>
+    <form action="#" method="get">
+        <fieldset>
+            <legend>Student Details</legend>
+
+            <label for="sname">Name:</label>
+            <input type="text" id="sname" name="sname" required><br><br>
+
+            <label for="pwd">Password:</label>
+            <input type="password" id="pwd" name="pwd" maxlength="10" required><br><br>
+
+            <label for="regno">Register Number:</label>
+            <input type="text" id="regno" name="regno" value="URK24CS9024" pattern="URK[0-9]{2}[A-Z]{2}[0-9]{4}" required><br><br>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" min="17" max="25" required><br><br>
+
+            <label for="mail">Email:</label>
+            <input type="email" id="mail" name="mail" required><br><br>
+
+            <label>Gender:</label>
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">Male</label>
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Female</label><br><br>
+
+            <label for="state">State:</label>
+            <select id="state" name="state">
+                <option value="tn">Tamil Nadu</option>
+                <option value="kl">Kerala</option>
+                <option value="ka">Karnataka</option>
+            </select><br><br>
+
+            <label for="about">About You:</label><br>
+            <textarea id="about" name="about" rows="3" cols="40"></textarea><br><br>
+
+            <input type="checkbox" id="agree" name="agree" required>
+            <label for="agree">I agree to the terms</label><br><br>
+
+            <input type="submit" value="Submit">
+            <input type="reset" value="Reset">
+        </fieldset>
+    </form>
+    <hr>
+
+    <!-- Embed and iframe elements -->
+    <h2>Lab Notes</h2>
+    <embed src="media/notes.pdf" type="application/pdf" width="420" height="240">
+
+    <h2>Location</h2>
+    <iframe src="https://www.google.com/maps?q=Karunya+University+Coimbatore&output=embed"
+        width="420" height="240" title="Karunya University map"></iframe>
+    <hr>
+
+    <!-- Link and footer -->
+    <p><a href="https://www.karunya.edu" target="_blank">Visit the University Website</a></p>
+    <footer>
+        <address>Karunya Institute of Technology and Sciences, Coimbatore, Tamil Nadu</address>
+        <p>&copy; 2026. URK24CS9024 - Web Technology Lab.</p>
+    </footer>
+</body>
+</html>

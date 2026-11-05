@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shortest and Longest Word</title>
+</head>
+<body>
+    <h2>Shortest and Longest Word</h2>
+    <input type="text" id="sentence" size="40" value="JavaScript makes web pages interactive">
+    <button onclick="findWords()">Find</button>
+    <p id="result"></p>
+
+    <script>
+        function getWords(text) {
+            let words = text.trim().split(/\s+/);
+            let shortest = words[0];
+            let longest = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if (words[i].length < shortest.length) {
+                    shortest = words[i];
+                }
+                if (words[i].length > longest.length) {
+                    longest = words[i];
+                }
+            }
+            return { shortest: shortest, longest: longest };
+        }
+
+        function findWords() {
+            let text = document.getElementById("sentence").value;
+
+            if (text.trim() === "") {
+                document.getElementById("result").innerHTML = "Please enter a sentence.";
+                return;
+            }
+
+            let answer = getWords(text);
+            document.getElementById("result").innerHTML =
+                "Shortest: " + answer.shortest + "<br>Longest: " + answer.longest;
+        }
+    </script>
+</body>
+</html>

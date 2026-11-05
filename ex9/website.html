@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Leaf Cafe</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            background-color: #f6f4ec;
+            color: #333;
+        }
+
+        header {
+            background-color: #2e6b3e;
+            color: white;
+            text-align: center;
+            padding: 16px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav {
+            background-color: #1f4d2c;
+            text-align: center;
+            padding: 10px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 16px;
+        }
+
+        nav a.active {
+            color: #ffd54f;
+            font-weight: bold;
+        }
+
+        main {
+            max-width: 760px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: #2e6b3e;
+            margin-top: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #dcebd9;
+        }
+
+        .gallery {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        figure {
+            margin: 0;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 7px;
+        }
+
+        button {
+            margin-top: 14px;
+            padding: 8px 16px;
+            background-color: #2e6b3e;
+            color: white;
+            border: none;
+        }
+
+        button:disabled {
+            background-color: #aaa;
+        }
+
+        .message {
+            color: #2e6b3e;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 12px;
+            font-size: 14px;
+        }
+    </style>
+    <script>
+        var app = angular.module("cafeApp", ["ngRoute"]);
+
+        app.config(function ($routeProvider) {
+            $routeProvider
+                .when("/", {
+                    templateUrl: "home.htm"
+                })
+                .when("/menu", {
+                    templateUrl: "menu.htm",
+                    controller: "MenuController"
+                })
+                .when("/gallery", {
+                    templateUrl: "gallery.htm"
+                })
+                .when("/contact", {
+                    templateUrl: "contact.htm",
+                    controller: "ContactController"
+                })
+                .otherwise({
+                    redirectTo: "/"
+                });
+        });
+
+        app.controller("NavController", function ($scope, $location) {
+            $scope.isActive = function (path) {
+                return $location.path() === path;
+            };
+        });
+
+        app.controller("MenuController", function ($scope) {
+            $scope.items = [
+                { name: "Masala Chai", type: "Drinks", price: 40 },
+                { name: "Filter Coffee", type: "Drinks", price: 50 },
+                { name: "Veg Sandwich", type: "Snacks", price: 90 },
+                { name: "Paneer Roll", type: "Snacks", price: 120 },
+                { name: "Chocolate Brownie", type: "Desserts", price: 110 }
+            ];
+        });
+
+        app.controller("ContactController", function ($scope) {
+            $scope.booking = {};
+            $scope.sent = false;
+
+            $scope.book = function () {
+                $scope.sent = true;
+            };
+        });
+    </script>
+</head>
+<body ng-app="cafeApp">
+    <header>
+        <h1>Green Leaf Cafe</h1>
+    </header>
+
+    <nav ng-controller="NavController">
+        <a href="#!/" ng-class="{active: isActive('/')}">Home</a>
+        <a href="#!/menu" ng-class="{active: isActive('/menu')}">Menu</a>
+        <a href="#!/gallery" ng-class="{active: isActive('/gallery')}">Gallery</a>
+        <a href="#!/contact" ng-class="{active: isActive('/contact')}">Contact</a>
+    </nav>
+
+    <main ng-view></main>
+
+    <footer>Green Leaf Cafe | Web Technology Lab</footer>
+
+    <!-- Page 1: Home -->
+    <script type="text/ng-template" id="home.htm">
+        <h2>Welcome to Green Leaf Cafe</h2>
+        <p>Green Leaf Cafe serves fresh snacks and hot drinks in a calm, friendly place.
+            Students and families visit us to relax, study and meet friends.</p>
+        <svg width="100%" height="140" viewBox="0 0 700 140">
+            <rect width="700" height="140" fill="#dcebd9"/>
+            <rect x="290" y="50" width="100" height="65" rx="8" fill="#2e6b3e"/>
+            <circle cx="400" cy="80" r="18" fill="none" stroke="#2e6b3e" stroke-width="8"/>
+            <path d="M315 40 q10 -14 0 -26 M345 40 q10 -14 0 -26" fill="none" stroke="#888" stroke-width="4"/>
+        </svg>
+        <p>Open every day from 8 AM to 9 PM.</p>
+    </script>
+
+    <!-- Page 2: Menu -->
+    <script type="text/ng-template" id="menu.htm">
+        <h2>Our Menu</h2>
+        <label>Search</label>
+        <input type="text" ng-model="search" placeholder="Search the menu">
+        <br><br>
+        <table>
+            <tr>
+                <th>Item</th>
+                <th>Type</th>
+                <th>Price</th>
+            </tr>
+            <tr ng-repeat="item in items | filter:search">
+                <td>{{item.name}}</td>
+                <td>{{item.type}}</td>
+                <td>Rs. {{item.price}}</td>
+            </tr>
+        </table>
+    </script>
+
+    <!-- Page 3: Gallery -->
+    <script type="text/ng-template" id="gallery.htm">
+        <h2>Gallery</h2>
+        <div class="gallery">
+            <figure>
+                <svg width="210" height="140"><rect width="210" height="140" fill="#ffe0b2"/><circle cx="105" cy="70" r="42" fill="#8d5524"/><circle cx="105" cy="70" r="30" fill="#c68642"/></svg>
+                <figcaption>Fresh Coffee</figcaption>
+            </figure>
+            <figure>
+                <svg width="210" height="140"><rect width="210" height="140" fill="#dcebd9"/><polygon points="105,25 175,115 35,115" fill="#2e6b3e"/><rect x="97" y="115" width="16" height="18" fill="#8d5524"/></svg>
+                <figcaption>Garden Seating</figcaption>
+            </figure>
+            <figure>
+                <svg width="210" height="140"><rect width="210" height="140" fill="#f8d7da"/><rect x="50" y="55" width="110" height="55" fill="#5d4037"/><rect x="50" y="42" width="110" height="16" fill="#fff"/></svg>
+                <figcaption>Brownie Special</figcaption>
+            </figure>
+        </div>
+    </script>
+
+    <!-- Page 4: Contact -->
+    <script type="text/ng-template" id="contact.htm">
+        <h2>Book a Table</h2>
+        <form name="bookForm" novalidate ng-submit="book()">
+            <label>Name</label>
+            <input type="text" ng-model="booking.name" required>
+            <label>Mobile Number</label>
+            <input type="text" ng-model="booking.mobile" required ng-pattern="/^[0-9]{10}$/">
+            <label>Number of People</label>
+            <select ng-model="booking.people" required>
+                <option value="">Select</option>
+                <option>2</option>
+                <option>4</option>
+                <option>6</option>
+            </select>
+            <button type="submit" ng-disabled="bookForm.$invalid">Book Now</button>
+        </form>
+        <p class="message" ng-show="sent">Thank you, {{booking.name}}. Your table for {{booking.people}} is booked.</p>
+    </script>
+</body>
+</html>

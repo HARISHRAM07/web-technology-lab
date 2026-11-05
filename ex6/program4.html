@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Move the Car</title>
+    <style>
+        #road {
+            position: relative;
+            height: 120px;
+            margin-top: 12px;
+            background-color: #ddd;
+            overflow: hidden;
+        }
+
+        #car {
+            position: absolute;
+            left: 0;
+            top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Move the Car</h2>
+    <button onclick="moveCar()">Move</button>
+    <button onclick="stopCar()">Stop</button>
+    <div id="road">
+        <img id="car" src="images/car.svg" alt="Car" width="120" height="60">
+    </div>
+
+    <script>
+        let position = 0;
+        let timer = null;
+
+        function step() {
+            let road = document.getElementById("road");
+            position += 5;
+            if (position > road.clientWidth) {
+                position = -120;
+            }
+            document.getElementById("car").style.left = position + "px";
+            timer = setTimeout(step, 30);
+        }
+
+        function moveCar() {
+            if (timer === null) {
+                step();
+            }
+        }
+
+        function stopCar() {
+            clearTimeout(timer);
+            timer = null;
+        }
+    </script>
+</body>
+</html>

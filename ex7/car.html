@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Workshop</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        h2 {
+            color: #0d5eff;
+        }
+
+        #car {
+            position: relative;
+            width: 240px;
+            height: 190px;
+            margin: 30px auto;
+        }
+
+        /* Trapezium shaped glass on top of the body */
+        #glass {
+            position: absolute;
+            top: 0;
+            left: 65px;
+            width: 110px;
+            height: 50px;
+            background-color: #3cb054;
+            clip-path: polygon(25% 0, 75% 0, 100% 100%, 0 100%);
+        }
+
+        #body {
+            position: absolute;
+            top: 50px;
+            left: 0;
+            width: 240px;
+            height: 50px;
+            background-color: #7fe52b;
+        }
+
+        /* Tyres stay attached to the bottom of the body when resized */
+        .tyre {
+            position: absolute;
+            top: 90px;
+            width: 70px;
+            height: 70px;
+            background-color: #101d4d;
+            border-radius: 50%;
+        }
+
+        #tyre1 {
+            left: 25px;
+        }
+
+        #tyre2 {
+            left: 135px;
+        }
+
+        button {
+            margin: 10px 24px;
+            padding: 7px 12px;
+            background-color: white;
+            border: 2px solid #4d94ff;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            const bodyColors = ["#7fe52b", "#e53935", "#1e88e5", "#fb8c00", "#8e24aa"];
+            const glassColors = ["#3cb054", "#90caf9", "#37474f", "#ffd54f", "#80cbc4"];
+            const defaultSize = 70;
+            const minSize = 40;
+            const maxSize = 110;
+
+            let bodyIndex = 0;
+            let glassIndex = 0;
+            let tyreSize = defaultSize;
+
+            function setTyreSize(size) {
+                tyreSize = size;
+                $(".tyre").css({ width: tyreSize, height: tyreSize });
+            }
+
+            $("#changeGlass").click(function () {
+                glassIndex = (glassIndex + 1) % glassColors.length;
+                $("#glass").css("background-color", glassColors[glassIndex]);
+            });
+
+            $("#changeBody").click(function () {
+                bodyIndex = (bodyIndex + 1) % bodyColors.length;
+                $("#body").css("background-color", bodyColors[bodyIndex]);
+            });
+
+            $("#increase").click(function () {
+                if (tyreSize < maxSize) {
+                    setTyreSize(tyreSize + 10);
+                }
+            });
+
+            $("#decrease").click(function () {
+                if (tyreSize > minSize) {
+                    setTyreSize(tyreSize - 10);
+                }
+            });
+
+            $("#reset").click(function () {
+                bodyIndex = 0;
+                glassIndex = 0;
+                $("#body").css("background-color", bodyColors[0]);
+                $("#glass").css("background-color", glassColors[0]);
+                setTyreSize(defaultSize);
+            });
+        });
+    </script>
+</head>
+<body>
+    <h2>3. Car Workshop</h2>
+
+    <div id="car">
+        <div id="glass"></div>
+        <div class="tyre" id="tyre1"></div>
+        <div class="tyre" id="tyre2"></div>
+        <div id="body"></div>
+    </div>
+
+    <button id="changeGlass">Change Glass Color</button>
+    <button id="changeBody">Change Body Color</button>
+    <button id="increase">Tyre Size Increase</button>
+    <button id="decrease">Tyre Size Decrease</button>
+    <button id="reset">Reset</button>
+</body>
+</html>

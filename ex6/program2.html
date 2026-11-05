@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Background Colour</title>
+</head>
+<body>
+    <h2>The background colour changes every 30 seconds</h2>
+    <p id="current"></p>
+
+    <script>
+        function randomValue() {
+            return Math.floor(Math.random() * 256);
+        }
+
+        function changeColour() {
+            let colour = "rgb(" + randomValue() + ", " + randomValue() + ", " + randomValue() + ")";
+            document.body.style.backgroundColor = colour;
+            document.getElementById("current").innerHTML = "Current colour: " + colour;
+        }
+
+        changeColour();
+        setInterval(changeColour, 30000);
+    </script>
+</body>
+</html>

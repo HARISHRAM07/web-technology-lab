@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Details</title>
+</head>
+<body>
+    <h2>Student Details</h2>
+    <h3>Born before 2000</h3>
+    <ul id="before"></ul>
+    <h3>Born in or after 2000</h3>
+    <ul id="after"></ul>
+
+    <script>
+        // Sample data used for this program
+        const students = [
+            { name: "Student A", regno: "SAMPLE001", yob: 1998 },
+            { name: "Student B", regno: "SAMPLE002", yob: 2004 },
+            { name: "Student C", regno: "SAMPLE003", yob: 1999 },
+            { name: "Student D", regno: "SAMPLE004", yob: 2005 }
+        ];
+
+        for (let i = 0; i < students.length; i++) {
+            let item = "<li>" + students[i].name + " - " + students[i].regno + "</li>";
+
+            if (students[i].yob < 2000) {
+                document.getElementById("before").innerHTML += item;
+            } else {
+                document.getElementById("after").innerHTML += item;
+            }
+        }
+    </script>
+</body>
+</html>

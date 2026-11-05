@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Currency Converter</title>
+</head>
+<body>
+    <h2>Currency Converter</h2>
+    <p>Sample rate used: 1 US Dollar = Rs. 85</p>
+    <p>Amount: <input type="number" id="amount" value="100"></p>
+    <p>
+        Convert:
+        <select id="direction">
+            <option value="toInr">US Dollar to Indian Rupee</option>
+            <option value="toUsd">Indian Rupee to US Dollar</option>
+        </select>
+    </p>
+    <button onclick="convert()">Convert</button>
+    <p id="result"></p>
+
+    <script>
+        const RATE = 85;
+
+        function convert() {
+            let amount = parseFloat(document.getElementById("amount").value);
+            let direction = document.getElementById("direction").value;
+
+            if (isNaN(amount) || amount < 0) {
+                document.getElementById("result").innerHTML = "Please enter a valid amount.";
+            } else if (direction === "toInr") {
+                document.getElementById("result").innerHTML = "Rs. " + (amount * RATE).toFixed(2);
+            } else {
+                document.getElementById("result").innerHTML = "$ " + (amount / RATE).toFixed(2);
+            }
+        }
+    </script>
+</body>
+</html>

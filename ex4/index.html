@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Tech Hub - CSS3</title>
+<style>
+*{box-sizing:border-box}
+body{
+    margin:0;font-family:Arial;background:#eef2ff;color:#222
+}
+/* Multiple backgrounds + background-size */
+header{
+    height:150px;text-align:center;padding:35px;color:white;
+    background-image:radial-gradient(circle,#38bdf8,transparent 35%),
+              linear-gradient(120deg,#312e81,#7c3aed);
+    background-size:180px 180px,cover;
+}
+header h1{margin:10px;font-size:32px}
+/* Navigation */
+nav{
+    background:#111827;text-align:center;padding:12px
+}
+nav a{
+    color:white;text-decoration:none;margin:0 25px;padding:8px 18px;
+    border-radius:20px
+}
+nav a:hover{background:#38bdf8;color:#111827}
+/* Rounded + shadow */
+.container{
+    width:90%;margin:25px auto;padding:22px;
+    background:white;border-radius:20px;
+    box-shadow:0 8px 25px #999
+}
+/* Border Image */
+.box{
+    padding:15px;margin-bottom:20px;
+    border:12px solid transparent;
+    border-image:url("border.jpg") 30 round;
+    text-align:center
+}
+/* Cards */
+.cards{display:flex;gap:20px;justify-content:center}
+.card{
+    width:30%;padding:20px;text-align:center;
+    border-radius:15px;
+    background:linear-gradient(145deg,#e0f2fe,#ddd6fe);
+    box-shadow:0 5px 15px #bbb
+}
+.card:hover{transform:translateY(-5px)}
+/* Form */
+form{max-width:450px;margin:auto}
+input{
+    width:100%;padding:10px;margin:7px 0;
+    border:2px solid #ccc;border-radius:8px
+}
+input:focus{border:3px solid #7c3aed;background:#f5f3ff}
+input:required{background:#f8fafc}
+input[type="email"]:invalid{border-color:red}
+input[type="email"]:valid{border-color:green}
+button{
+    width:100%;padding:11px;border:0;border-radius:10px;
+    background:#7c3aed;color:white;cursor:pointer
+}
+button:hover{background:#4f46e5}
+/* Adjacent sibling + opacity */
+.itemName{padding:10px;font-weight:bold}
+.itemImg{opacity:.25;transition:.3s}
+.itemName:hover + .itemImg{opacity:1}
+/* Table */
+table{width:100%;border-collapse:collapse;margin-top:15px}
+th,td{padding:10px;text-align:center;border:1px solid #ddd}
+th{background:#312e81;color:white}
+tr:nth-child(odd){background:#eef2ff}
+tr:nth-child(even){background:#ddd6fe}
+tr:hover{background:#bae6fd}
+footer{
+    text-align:center;padding:15px;background:#111827;color:white;
+    margin-top:25px
+}
+</style>
+</head>
+<body>
+<header>
+    <h1>TECH HUB</h1>
+    <p>Explore • Learn • Create</p>
+</header>
+<nav>
+    <a href="#">Home</a>
+    <a href="#">Courses</a>
+    <a href="#">Projects</a>
+    <a href="#">Contact</a>
+</nav>
+<div class="container">
+    <div class="box">
+      <h2>Advanced CSS3 Web Design</h2>
+      <p>Beautiful interfaces created using modern CSS3 properties.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+          <h3>HTML5</h3>
+          <p>Build structured webpages.</p>
+  </div>
+  <div class="card">
+    <h3>CSS3</h3>
+    <p>Design attractive interfaces.</p>
+  </div>
+  <div class="card">
+    <h3>JavaScript</h3>
+    <p>Add interaction to webpages.</p>
+  </div>
+</div>
+<h2>Register</h2>
+<form>
+  <input type="text" placeholder="Enter Name" required>
+  <input type="email" placeholder="Enter Email" required>
+  <input type="password" placeholder="Enter Password" required>
+  <button>Register</button>
+</form>
+<h2>Course Details</h2>
+<table>
+  <tr><th>Course</th><th>Duration</th><th>Level</th></tr>
+  <tr><td>HTML5</td><td>4 Weeks</td><td>Beginner</td></tr>
+  <tr><td>CSS3</td><td>5 Weeks</td><td>Intermediate</td></tr>
+  <tr><td>JavaScript</td><td>6 Weeks</td><td>Advanced</td></tr>
+  <tr><td>Web Design</td><td>8 Weeks</td><td>Advanced</td></tr>
+</table>
+<h2>Hover Effect</h2>
+<table>
+  <tr>
+    <td class="itemName">Hover over this text</td>
+         <td class="itemImg">🌐 Web Design</td>
+    </tr>
+  </table>
+</div>
+<footer>
+  © 2026 Tech Hub | Web Technology Lab
+</footer>
+</body>
+</html>

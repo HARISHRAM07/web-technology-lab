@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cake Shop</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 20px auto;
+            max-width: 760px;
+        }
+
+        h1 {
+            background-color: #c00000;
+            color: white;
+            font-size: 18px;
+            font-weight: normal;
+            text-align: center;
+            padding: 6px;
+            margin: 0 0 8px;
+        }
+
+        .cakes {
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .cakes img {
+            width: 165px;
+            height: 150px;
+            object-fit: cover;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        h2 {
+            color: #0d5eff;
+            text-align: center;
+            margin: 16px 0 8px;
+        }
+
+        form {
+            width: 520px;
+            margin: auto;
+        }
+
+        label {
+            display: block;
+            color: blue;
+            font-size: 13px;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 7px;
+            color: #c00000;
+            font-weight: bold;
+        }
+
+        #order {
+            display: block;
+            width: 220px;
+            margin: 12px auto;
+            padding: 8px;
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #bill {
+            width: 520px;
+            margin: auto;
+            border-top: 2px solid blue;
+            text-align: center;
+        }
+
+        #bill h3 {
+            color: green;
+        }
+
+        #totalLabel {
+            display: inline-block;
+            width: 240px;
+            padding: 5px;
+            background-color: #28a745;
+            color: white;
+            font-size: 20px;
+        }
+
+        #total {
+            color: #c00000;
+            font-size: 20px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            $("#order").click(function () {
+                let colorCake = Number($("#colorCake").val());
+                let brownCake = Number($("#brownCake").val());
+                let milkyCake = Number($("#milkyCake").val());
+                let blackForest = Number($("#blackForest").val());
+
+                // Quantities cannot be negative or fractional
+                let quantities = [colorCake, brownCake, milkyCake, blackForest];
+                for (let i = 0; i < quantities.length; i++) {
+                    if (!Number.isInteger(quantities[i]) || quantities[i] < 0) {
+                        alert("Please enter valid quantities.");
+                        return;
+                    }
+                }
+
+                let totalPrice = colorCake * 300 + brownCake * 200 +
+                    milkyCake * 250 + blackForest * 350;
+
+                $("#total").text("Rs." + totalPrice);
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>CAKE SHOP</h1>
+
+    <div class="cakes">
+        <div><img src="images/color-cake.jpg" alt="Color Cake">Color Cake – Rs. 300</div>
+        <div><img src="images/brown-cake.jpg" alt="Brown Cake">Brown Cake – Rs. 200</div>
+        <div><img src="images/milky-cake.jpg" alt="Milky Cake">Milky Cake – Rs. 250</div>
+        <div><img src="images/black-forest.jpg" alt="Black Forest Cake">Black Forest Cake – Rs. 350</div>
+    </div>
+
+    <h2>Order Cake</h2>
+
+    <form onsubmit="return false;">
+        <label for="colorCake">Color Cake(Quantity)</label>
+        <input type="number" id="colorCake" min="0" value="2">
+
+        <label for="brownCake">Brown Cake(Quantity)</label>
+        <input type="number" id="brownCake" min="0" value="1">
+
+        <label for="milkyCake">Milky Cake(Quantity)</label>
+        <input type="number" id="milkyCake" min="0" value="2">
+
+        <label for="blackForest">Black Forest Cake(Quantity)</label>
+        <input type="number" id="blackForest" min="0" value="1">
+
+        <button type="button" id="order">Place Order</button>
+    </form>
+
+    <div id="bill">
+        <h3>Purchase Order Bill!!</h3>
+        <span id="totalLabel">Total Price</span>
+        <span id="total">Rs.0</span>
+    </div>
+</body>
+</html>
